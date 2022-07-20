@@ -1,0 +1,96 @@
+[
+    {
+        "id": "b5d1af96.0416f8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3e1af77b.90d9e8",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60001",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "",
+        "topic": "q",
+        "base64": false,
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "89a91cbb.ed5ef"
+            ]
+        ]
+    },
+    {
+        "id": "32094493.c5236c",
+        "type": "debug",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 510,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "89a91cbb.ed5ef",
+        "type": "function",
+        "z": "b5d1af96.0416f8",
+        "name": "mqttFunction",
+        "func": "var led0 = msg.payload[0]\nvar led1 = msg.payload[1]\nvar led2 = msg.payload[2]\nmsg.topic=\"channels/1725182/publish\"\nmsg.payload=\"led0=\"+led0+\"&led1=\"+led1+\"&led2=\"+led2+\"&status=MQTTPUBLISH\"\n \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 180,
+        "wires": [
+            [
+                "32094493.c5236c",
+                "334972f7.2cb146"
+            ]
+        ]
+    },
+    {
+        "id": "334972f7.2cb146",
+        "type": "mqtt out",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "topic": "",
+        "qos": "2",
+        "retain": "",
+        "broker": "b9952ddf.524ec",
+        "x": 490,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "b9952ddf.524ec",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "Challenge 3",
+        "broker": "mqqt3.thingskpeak.com",
+        "port": "1883",
+        "clientid": "HC46FxI0IiI3ODYbLyIiKik",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
